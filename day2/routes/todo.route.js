@@ -6,6 +6,6 @@ const router = express.Router();
 
 //defining routers 
 
-router.post("/createTodo" ,()=> todoController); 
+router.post("/createTodo" ,todoController.createTodo); 
 
 module.exports = router; 

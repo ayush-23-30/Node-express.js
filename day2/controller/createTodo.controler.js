@@ -1,6 +1,6 @@
 // import model;
 
-const todo = require('../models/todo.js')
+const todo = require('../models/todo.model.js')
 
 // working extract karna hai title or description ko
 // dono ka logical likhna hai 

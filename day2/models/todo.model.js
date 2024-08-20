@@ -1,4 +1,8 @@
 const mongoose = require('mongoose'); 
+const Like = require('./like.model')
+const Comment = require('./comment.model')
+
+
 
 const todoSchema = new mongoose.Schema({
   title : {
@@ -10,7 +14,15 @@ const todoSchema = new mongoose.Schema({
     type : String , 
     require : true, 
     maxlength : 100
-  }
+  }, 
+  like : [{
+    type : mongoose.Schema.Types.ObjectId, 
+    ref : "Like"
+  }], 
+  comment : [{
+    type : mongoose.Schema.Types.ObjectId, 
+    ref : "Comment"
+  }]
 
 },{timestamps : true})
 
