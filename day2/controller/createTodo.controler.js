@@ -7,12 +7,6 @@ const todo = require('../models/todo.model.js')
 exports.createTodo = async(req, res) =>{
 try {
   const {title , description} = req.body;
-  if(!title) {
-    throw new Error("the title is not available")
-  }
-  if(!description) {
-    throw new Error("the description is not available")
-  }
 
   const response = await todo.create({title, description})
 

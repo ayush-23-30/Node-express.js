@@ -1,33 +1,39 @@
-const mongoose = require('mongoose')
-const comment = require('../models/comment.model.js')
-const todo = require('../models/todo.model.js')
+const Comment = require("../models/comment.model.js");
 
-const createComment = async (req,res)=>{
+const Post = require('../models/post.models.js')
+
+
+exports.createComment = async (req, res) => {
   try {
-    const {post , user , content} = req.body;
-   
-    const comment = new comment({
-      post , user , body 
-    })
+    const { post, body  } = req.body;
 
-    //save  the new comment into dB (save always wants a object that's why we make a object above)
+    // Create a new comment object
+    const newComment = new Comment({
+      post, 
+      body
+    });
 
-     const savedComment = await comment.save(); 
+    // Save the new comment into the database
+    const savedComment = await newComment.save();
 
-     // change in post kyuki new comment add hua hai pehle post search hogi fir usme comment m update 
+    // Update the corresponding todo with the new comment
+    const updatedPost = await Post.findByIdAndUpdate(
+      post,
+      { $push: { comments: savedComment._id } },  // Assuming the field is 'comments'
+      { new: true }  // Return the updated document
+    )
+    .populate("comments")  // Assuming you want to populate the 'comments' field
+    .exec();
 
-     const updatedPost = await post.findByIdAndUpdate(post , {$post : {comment : savedComment._id}}, {new : true})
-     .populate("comment")
-     .exec(); 
-
-     res.json({
-      post : updatedPost, 
-     })
-
+    // Return the updated todo
+    res.json({
+      post: updatedPost,
+    });
 
   } catch (error) {
-    return res.status(500 ).json({
-      error : "Error while creating comment"
-    })
+    console.error("Error while creating comment", error.message);
+    return res.status(500).json({
+      error: "Error while creating comment",
+    });
   }
-}
+};

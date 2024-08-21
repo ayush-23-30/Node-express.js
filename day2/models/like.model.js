@@ -7,10 +7,10 @@ const likeSchema = mongoose.Schema({
     type : mongoose.Schema.Types.ObjectId, 
     ref : "Todo"
   }, 
-  user : {
-    type : String, 
-    required : true, 
-  }
+  // user : {
+  //   type : String, 
+  //   required : true, 
+  // }
 },{timestamps : true})
 
 module.exports = mongoose.model("Like" , likeSchema)

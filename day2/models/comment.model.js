@@ -1,19 +1,13 @@
 const mongoose = require('mongoose')
-const Todo = require('./todo.model')
-
 
 const commentSchema = mongoose.Schema({
-  content : {
+  body: {
     type : String, 
     required : true
-  }, 
-  user : {
-    type : String,
-    required  : true
-  }, 
-  post : { 
-    type : mongoose.Schema.Types.ObjectId, 
-    ref : "Todo" 
+  },
+   post: {  
+  type : mongoose.Schema.Types.ObjectId, 
+    ref : "Post " 
   }, 
 }, {timestamps : true})
 
