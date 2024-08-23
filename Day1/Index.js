@@ -21,13 +21,13 @@ app.get('/' , (req , res)=>{
   res.send('Hello ji , kase ho ')
 })
 
- const bodyParser = require('body-parser'); 
- app.use(bodyParser.json()); 
 
-app.post('/api/cars' , (req,res)=>{
-const {name , brand} = req.body; 
-console.log(name);
-console.log(brand);
-res.send("car has been submitted"); 
-})
+ app.use(express.json()); 
+
+// app.post('/api/cars' , (req,res)=>{
+// const {name , brand} = req.body; 
+// console.log(name);
+// console.log(brand);
+// res.send("car has been submitted"); 
+// })
 
