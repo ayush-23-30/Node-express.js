@@ -19,7 +19,7 @@ exports.createComment = async (req, res) => {
     // Update the corresponding todo with the new comment
     const updatedPost = await Post.findByIdAndUpdate(
       post,
-      { $push: { comments: savedComment._id } },  // Assuming the field is 'comments'
+      { $push: { comments: savedComment._id }},  // Assuming the field is 'comments'
       { new: true }  // Return the updated document
     )
     .populate("comments")  // Assuming you want to populate the 'comments' field
