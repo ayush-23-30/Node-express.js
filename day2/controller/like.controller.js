@@ -1,51 +1,65 @@
-const Post = require('../models/post.models.js')
-const Like = require('../models/like.model.js')
+const Post = require('../models/post.models.js');
+const Like = require('../models/like.model.js');
 
-
-exports.LikePost = async(req, res) =>{
+exports.LikePost = async (req, res) => {
   try {
-    const {post} = req.body; 
+    const { post } = req.body;
+
+    if (!post) {
+      return res.status(400).json({ error: "Post ID is required" });
+    }
+
     const like = new Like({
-      post 
-    })
+      post
+    });
 
     const savedLike = await like.save();
 
-    // update my post collection basics on this 
+    // Update post collection by pushing the like ID
+    const updatePost = await Post.findByIdAndUpdate(
+      post,
+      { $push: { likes: savedLike._id } },
+      { new: true }
+    );
 
-    const updatePost = await Post.findByIdAndUpdate(post , {$push : {likes : savedLike._id}} , {new : true})
-     
     res.json({
-      post : updatePost, 
-
-    })
+      post: updatePost,
+    });
 
   } catch (error) {
-    console.log("this is Like controller having issues ", error.message);
+    console.log("This is Like controller having issues: ", error.message);
     res.status(400).json({
-      error : " Error while Like the posts"
-    })
+      error: "Error while liking the post"
+    });
   }
-} 
+};
 
-exports.unLikePost = async (req, res)=>{
+exports.unLikePost = async (req, res) => {
+  try {
+    const { post, like } = req.body;
 
-try {
-    const {post , like } = req.body; 
-  
-    const deleteliked = await Like.findOneAndDelete({post , _id:like})
+    if (!post || !like) {
+      return res.status(400).json({ error: "Post ID and Like ID are required" });
+    }
 
-    const updatePosts = await Post.findByIdAndUpdate(post , {$pull : {likes : deleteliked._id}} , {new: true})
+    const deleteliked = await Like.findOneAndDelete({ post, _id: like });
 
-  res.josn({
-    updatePosts
-  })
+    if (!deleteliked) {
+      return res.status(404).json({ error: "Like not found" });
+    }
 
-} catch (error) {
-  console.log("error message from unliked post", error.message);
-  res.status(401).json({
-    error: "error while unliking the posts"
-  })
-  
-}
-}
+    const updatePosts = await Post.findByIdAndUpdate(
+      post,
+      { $pull: { likes: deleteliked._id } },
+      { new: true }
+    );
+
+    res.json(updatePosts);
+
+  } catch (error) {
+    console.log("Error message from unlike post: ", error.message);
+    res.status(401).json({
+      error: "Error while unliking the post"
+    });
+  }
+};
