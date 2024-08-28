@@ -7,7 +7,8 @@ const updateTodoController = async (req, res) =>{
     const {id} = req.params;
     const {title, description}  = req.body; 
 
-    const todo = await Todo.findByIdAndUpdate({_id : id}, 
+    const todo = await Todo.findByIdAndUpdate(
+      {_id : id}, 
       {title, description , timestamps : true}
     )
 

@@ -7,7 +7,7 @@ const Deletetodo = async (req, res) => {
 
     const todo = await Todo.findByIdAndDelete(
       { _id: id }
-      // {title, description }
+      
     );
 
     res.status(202).json({
