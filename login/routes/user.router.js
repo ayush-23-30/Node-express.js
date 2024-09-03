@@ -3,7 +3,7 @@ import { loginContoller , signUpController } from '../controller/auth.controller
 
 const router = Router(); 
 
-router.post("/login", loginContoller); 
+// router.post("/login", loginContoller); 
 router.post("/signUp", signUpController);
 
 
