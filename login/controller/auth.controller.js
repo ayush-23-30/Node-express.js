@@ -37,6 +37,7 @@ const loginContoller = async (req, res) => {
     expiresIn : "2h"
   });
 
+  user = user.toObject(); // now the user is forced to convert into object - because we can't push the token and password in the object normally 
   user.token = token; 
   user.password = undefined; 
   const options = {
