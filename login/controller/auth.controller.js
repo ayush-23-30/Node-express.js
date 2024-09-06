@@ -16,7 +16,7 @@ const loginContoller = async (req, res) => {
       }); 
     }
 
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (!email) {
       return res.status(404).json({
         success: false,
@@ -40,6 +40,7 @@ const loginContoller = async (req, res) => {
   user = user.toObject(); // now the user is forced to convert into object - because we can't push the token and password in the object normally 
   user.token = token; 
   user.password = undefined; 
+
   const options = {
     expires : new Date( Date.now() + 3 * 24 * 60 * 60 * 1000 ), 
     httpOnly : true, 
