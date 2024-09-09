@@ -39,14 +39,14 @@ const loginContoller = async (req, res) => {
 
   user = user.toObject(); // now the user is forced to convert into object - because we can't push the token and password in the object normally 
   user.token = token; 
-  user.password = undefined; 
+  user.password = undefined;
 
   const options = {
     expires : new Date( Date.now() + 3 * 24 * 60 * 60 * 1000 ), 
     httpOnly : true, 
   }
 
-  res.cookies("token", token , options).status(200).json({
+  res.cookie("token", token , options).status(200).json({
     sucess : true, 
     token, 
     user, 
@@ -119,3 +119,5 @@ const signUpController = async (req, res) => {
 };
 
 export { signUpController, loginContoller };
+
+// bhai - token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkJoYWlKQUFOQGdtYWlsLmNvbSIsImlkIjoiNjZkZWRiNDQ3NmYxNjhhZGQ2MmFmYmIzIiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3MjU4ODExOTcsImV4cCI6MTcyNTg4ODM5N30.APOvhbuJc80URlcu38tLmxaihqO8e3uiD9M0OQetdDE"

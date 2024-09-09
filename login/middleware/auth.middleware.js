@@ -9,7 +9,19 @@ configDotenv();
 const auth = (req, res , next) =>{
   try {
     // extract jwt token 
-    const token = req.body.token || req.cookies.token; 
+    // you can't take token from cookie without intall it 
+    // best one is req.header 
+
+    // req ke ander header me se Authorization m se replace kardo "Bearer " + space ko "" empty string reamining is always a token (syntax from jwt token)
+
+  console.log("cookies :" , req.cookies.token);     
+  console.log("body : " , req.body.token);     
+ console.log("header : " , req.header("Authorization").replace("Bearer " , "")); 
+
+    const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer " , ""); 
+
+    // ways to fetch token from body; We have 3 ways (i).from req.body.token (ii). from req.cookie.token (iii). from req.header("Authorization").replace("Bearer", " ")
+
     if(!token){
       return res.status(303).json({
         success : false, 
