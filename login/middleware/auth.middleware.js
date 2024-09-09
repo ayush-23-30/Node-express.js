@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 
 configDotenv();
 
-
 const auth = (req, res , next) =>{
   try {
     // extract jwt token 

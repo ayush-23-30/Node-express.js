@@ -7,12 +7,12 @@ const router = Router();
 router.post("/login", loginContoller);
 router.post("/signUp", signUpController);
 
-// protected route [jiske pass access hai vahi dekh sakta hai , selected by role]
+// protected route [jiske pass access hai vahi dekh sakta hai, selected by role]
 
 router.get("/test", auth,(req,res) =>{
   res.json({
     success : true , 
-    message  : " this is a testing middle ware route"
+    message  : "this is a testing middle ware route"
   })
 })
 

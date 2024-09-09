@@ -46,7 +46,7 @@ const loginContoller = async (req, res) => {
     httpOnly : true, 
   }
 
-  res.cookie("token", token , options).status(200).json({
+  res.cookies("token", token , options).status(200).json({
     sucess : true, 
     token, 
     user, 
