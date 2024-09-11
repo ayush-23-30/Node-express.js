@@ -14,9 +14,10 @@ const auth = (req, res , next) =>{
 
     // req ke ander header me se Authorization m se replace kardo "Bearer " + space ko "" empty string reamining is always a token (syntax from jwt token)
 
-  console.log("cookies :" , req.cookies.token);     
-  console.log("body : " , req.body.token);     
- console.log("header : " , req.header("Authorization").replace("Bearer " , "")); 
+  // console.log("cookies :" , req.cookies.token);     
+//   console.log("body : " , req.body.token);     
+//  console.log("header : " , req.header("Authorization").replace("Bearer " , "")); 
+
 
     const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer " , ""); 
 

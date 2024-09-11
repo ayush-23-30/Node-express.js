@@ -1,6 +1,7 @@
 import express, { Router } from 'express'
 import { loginContoller , signUpController } from '../controller/auth.controller.js';
 import {auth , isStudent , isAdmin } from '../middleware/auth.middleware.js'
+import { User } from '../models/signUp.model.js';
 
 const router = Router(); 
 
@@ -29,7 +30,25 @@ res.json({
 })
 })
 
-
+router.get("/getEmail", auth, async (req,res) =>{
+  try {
+    const id = req.user.id; 
+    const user = await User.findById(id);
+    console.log("ID : ", id);
+    
+    res.json({
+      success : true,
+      message : " ID finding route" ,
+      user : user
+      
+    })
+  } catch (error) {
+    res.status(402).json({
+      error : error.message, 
+      message : " can't get the id of email"
+    })
+  }
+})
 
 export default router; 
 
