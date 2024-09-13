@@ -8,9 +8,10 @@ import {
 
 const routeUploader = express.Router();
 
-routeUploader.post("/imageUploader", imageUploadController);
-routeUploader.post("/localfile", LocalFileUploadController);
+routeUploader.post("/CloudinaryImageUploader", imageUploadController);
+routeUploader.post("/localfile",LocalFileUploadController);
 routeUploader.post("/videoUpload", videoUploadController);
 routeUploader.post("/imageReducer", imageReducerUploadContoller);
 
 export default routeUploader;
+ 
