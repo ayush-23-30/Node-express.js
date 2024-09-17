@@ -32,6 +32,7 @@ fileUploadSchema.post("save", async function (doc){
         pass : process.env.MAIL_PASS
       }
     })
+    
 
     let info = await transporter.sendMail(
     {  from : `ayush kumar`,
