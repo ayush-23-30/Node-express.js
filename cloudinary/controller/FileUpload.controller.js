@@ -48,6 +48,7 @@ const imageUploadController = async(req, res) =>{
     const fileType = file.name.split(".")[1].toLowerCase(); 
     // console.log(fileType);
     
+    
 
     // checking the file type is according to our file type 
 
@@ -64,8 +65,6 @@ const imageUploadController = async(req, res) =>{
 
 const response = await uploadToCloudinary(file, "babbarBackend")
 console.log(response);
-
-
 
 // entry in DB
 
@@ -107,6 +106,7 @@ const imageReducerUploadContoller = async (req, res)=>{
     
   }
 }
+
 
 // today is only do image save in your own server 
 // it take path from client and Add to your server...

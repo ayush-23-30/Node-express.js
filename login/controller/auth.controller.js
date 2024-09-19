@@ -83,7 +83,6 @@ const signUpController = async (req, res) => {
         message: " User already Exist",
       });
     }
-
     // Secure Your Password
 
     let hashedPassword;
