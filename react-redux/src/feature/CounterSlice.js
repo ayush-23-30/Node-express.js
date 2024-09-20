@@ -9,15 +9,18 @@ export const counterSlice = createSlice({
     increment : state => { // this is actions 
       state.value += 1; // 1st reducer logic of increment
     }, 
+    reset : state => { // this is actions 
+      state.value = 0; // 1st reducer logic of increment
+    }, 
     decrement : state =>{
       state.value -= 1; // 2nd reducer logic of decrement 
     }, incrementByAmount : (state, action) =>{
-      state.value += action.payload; // 3rd. reducer logic with state - action.payload;  -- payload m data hoga vo utna hi add ho jae ga 
+      state.value += Number(action.payload); // 3rd. reducer logic with state - action.payload;  -- payload m data hoga vo utna hi add ho jae ga 
       
     }
   }
 })
 
-export const {increment, decrement , incrementByAmount } = counterSlice.actions; 
+export const {increment, decrement ,reset,  incrementByAmount } = counterSlice.actions; 
 
 export default counterSlice.reducer; 
